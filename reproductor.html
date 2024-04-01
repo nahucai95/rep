@@ -79,10 +79,20 @@
     var getIMG = getParameterByName('img');
     var getKEY = getParameterByName('key');
     var getKEY2 = getParameterByName('key2');
+
+    // Función para ocultar la imagen y mostrar el reproductor
+    function showPlayer() {
+        document.getElementById('player').style.display = 'block';
+        document.getElementById('imageOverlay').style.display = 'none';
+    }
 </script>
 </head>
 <body>
-<div id="player" tabindex="0"></div> <!-- Añadir tabindex para que el reproductor pueda recibir el enfoque con el mando -->
+<div id="player" tabindex="0" style="display: none;"></div> <!-- Añadir tabindex para que el reproductor pueda recibir el enfoque con el mando -->
+<!-- Overlay de imagen -->
+<div id="imageOverlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block;">
+    <img src="URL_DE_TU_IMAGEN" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;">
+</div>
 <!-- Popup para seleccionar la calidad -->
 <div id="qualityPopup" class="popup">
     <h2>Calidad</h2>
@@ -112,7 +122,7 @@ playerInstance.setup({
     width: "100%",
     height: "100%",
     aspectratio: "16:9",
-    autostart: true, // Desactivar la reproducción automática
+    autostart: false, // Desactivar la reproducción automática
     cast: {},
     controls: false // Activar los controles del reproductor
 });
@@ -156,6 +166,10 @@ function hidePopup() {
     var popup = document.getElementById("qualityPopup");
     popup.style.display = "none";
 }
+
+// Mostrar el reproductor después de 5 segundos
+setTimeout(showPlayer, 5000);
+
 </script>
 </body>
 </html>
