@@ -96,6 +96,9 @@
 var playerInstance = jwplayer("player");
 playerInstance.setup({
     playlist: [{
+        "title": "Rustico TV | Star+",
+        "description": "Mirar Star+ de manera gratuita",
+        "image": getIMG,
         "sources": [{
             "default": true, // Establecer como verdadero para seleccionar esta calidad por defecto
             "type": "dash",
@@ -111,7 +114,7 @@ playerInstance.setup({
     aspectratio: "16:9",
     autostart: true, // Desactivar la reproducción automática
     cast: {},
-    controls: true // Activar los controles del reproductor
+    controls: false // Activar los controles del reproductor
 });
 
 // Evento para mostrar el popup cuando se presiona la flecha hacia arriba
