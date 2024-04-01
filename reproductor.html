@@ -11,6 +11,7 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
+        background-color: #f4f4f4; /* Color de fondo gris claro */
     }
     #player {
         position: absolute;
@@ -33,10 +34,34 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
+        background-color: #333; /* Color de fondo gris oscuro */
+        color: #fff; /* Color de texto blanco */
         padding: 20px;
-        border: 1px solid #ccc;
+        border-radius: 10px;
         z-index: 9999;
+    }
+    .popup h2 {
+        margin-top: 0;
+    }
+    .popup select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #555; /* Color de fondo gris más claro */
+        color: #fff; /* Color de texto blanco */
+    }
+    .popup button {
+        padding: 10px 20px;
+        background-color: #008cba; /* Color de fondo azul */
+        border: none;
+        border-radius: 5px;
+        color: #fff; /* Color de texto blanco */
+        cursor: pointer;
+    }
+    .popup button:hover {
+        background-color: #005f73; /* Color de fondo azul más oscuro */
     }
 </style>
 <script>
