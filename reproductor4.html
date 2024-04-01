@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex" />
+<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/console-ban@4.1.0/dist/console-ban.min.js"></script>
+<style type="text/css">
+    /* Apariencia General */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    #player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    /* Ajustes para Android TV */
+    #player:focus {
+        outline: none; /* Eliminar el borde de enfoque para mejorar la apariencia en TV */
+    }
+</style>
+<script>
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+        var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : results[1].replace(/\+/g, " ");
+    }
+
+    var getURL = getParameterByName('get');
+    var getIMG = getParameterByName('img');
+    var getKEY = getParameterByName('key');
+    var getKEY2 = getParameterByName('key2');
+    
+    // Decodificar los valores GET codificados en base64
+    getURL = atob(getURL);
+    getIMG = atob(getIMG);
+    getKEY = atob(getKEY);
+    getKEY2 = atob(getKEY2);
+</script>
+</head>
+<body>
+<div id="player" tabindex="0"></div> <!-- Añadir tabindex para que el reproductor pueda recibir el enfoque con el mando -->
+<script>
+var playerInstance = jwplayer("player");
+playerInstance.setup({
+    playlist: [{
+        "title": "Rustico TV | Star+",
+        "description": "Mirar Star+ de manera gratuita",
+        "image": getIMG,
+        "sources": [{
+            "default": true, // Establecer como verdadero para seleccionar esta calidad por defecto
+            "type": "dash",
+            "file": getURL,
+            "drm": {
+                "clearkey": {"keyId": getKEY, "key": getKEY2}
+            },
+            "label": "720p" // Etiqueta para identificar la calidad 720p (6926 kbps)
+        }]
+    }],
+    width: "100%",
+    height: "100%",
+    aspectratio: "16:9",
+    autostart: false, // Desactivar la reproducción automática
+    cast: {},
+    controls: true // Activar los controles del reproductor
+});
+</script>
+</body>
+</html>
