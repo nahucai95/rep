@@ -42,6 +42,7 @@
     }
     .popup h2 {
         margin-top: 0;
+        text-align: center; /* Centrar el texto */
     }
     .popup select {
         width: 100%;
@@ -128,33 +129,4 @@ function showPopup() {
     var popup = document.getElementById("qualityPopup");
     popup.style.display = "block";
 
-    // Obtener las calidades disponibles del reproductor
-    var qualities = playerInstance.getQualityLevels();
-    var select = document.getElementById("qualitySelect");
-    select.innerHTML = "";
-
-    // Agregar opciones de calidad al select
-    qualities.forEach(function(quality, index) {
-        var option = document.createElement("option");
-        option.value = index;
-        option.textContent = quality.label;
-        select.appendChild(option);
-    });
-}
-
-// Función para aplicar la calidad seleccionada por el usuario
-function applyQuality() {
-    var select = document.getElementById("qualitySelect");
-    var selectedIndex = select.value;
-    playerInstance.setCurrentQuality(parseInt(selectedIndex));
-    hidePopup();
-}
-
-// Función para ocultar el popup
-function hidePopup() {
-    var popup = document.getElementById("qualityPopup");
-    popup.style.display = "none";
-}
-</script>
-</body>
-</html>
+    // Obtener las calidades disponibles del reproduct
