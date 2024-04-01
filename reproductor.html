@@ -54,14 +54,16 @@
     }
     .popup button {
         padding: 10px 20px;
-        background-color: #008cba; /* Color de fondo azul */
+        background-color: #ff0000; /* Color de fondo rojo */
         border: none;
         border-radius: 5px;
         color: #fff; /* Color de texto blanco */
         cursor: pointer;
+        display: block;
+        margin: 0 auto; /* Centrar el botón */
     }
     .popup button:hover {
-        background-color: #005f73; /* Color de fondo azul más oscuro */
+        background-color: #cc0000; /* Color de fondo rojo más oscuro al pasar el cursor */
     }
 </style>
 <script>
@@ -82,7 +84,7 @@
 <div id="player" tabindex="0"></div> <!-- Añadir tabindex para que el reproductor pueda recibir el enfoque con el mando -->
 <!-- Popup para seleccionar la calidad -->
 <div id="qualityPopup" class="popup">
-    <h2>Seleccionar Calidad</h2>
+    <h2>Calidad</h2>
     <select id="qualitySelect">
         <!-- Las opciones de calidad se agregarán aquí dinámicamente -->
     </select>
