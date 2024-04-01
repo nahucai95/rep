@@ -26,6 +26,18 @@
     #player:focus {
         outline: none; /* Eliminar el borde de enfoque para mejorar la apariencia en TV */
     }
+    /* Estilos para el popup */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        z-index: 9999;
+    }
 </style>
 <script>
     function getParameterByName(name) {
@@ -43,6 +55,15 @@
 </head>
 <body>
 <div id="player" tabindex="0"></div> <!-- Añadir tabindex para que el reproductor pueda recibir el enfoque con el mando -->
+<!-- Popup para seleccionar la calidad -->
+<div id="qualityPopup" class="popup">
+    <h2>Seleccionar Calidad</h2>
+    <select id="qualitySelect">
+        <!-- Las opciones de calidad se agregarán aquí dinámicamente -->
+    </select>
+    <button onclick="applyQuality()">Aplicar</button>
+</div>
+
 <script>
 var playerInstance = jwplayer("player");
 playerInstance.setup({
@@ -67,6 +88,46 @@ playerInstance.setup({
     cast: {},
     controls: true // Activar los controles del reproductor
 });
+
+// Evento para mostrar el popup cuando se presiona la flecha hacia arriba
+document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowUp") {
+        showPopup();
+    }
+});
+
+// Función para mostrar el popup y cargar las opciones de calidad
+function showPopup() {
+    var popup = document.getElementById("qualityPopup");
+    popup.style.display = "block";
+
+    // Obtener las calidades disponibles del reproductor
+    var qualities = playerInstance.getQualityLevels();
+    var select = document.getElementById("qualitySelect");
+    select.innerHTML = "";
+
+    // Agregar opciones de calidad al select
+    qualities.forEach(function(quality, index) {
+        var option = document.createElement("option");
+        option.value = index;
+        option.textContent = quality.label;
+        select.appendChild(option);
+    });
+}
+
+// Función para aplicar la calidad seleccionada por el usuario
+function applyQuality() {
+    var select = document.getElementById("qualitySelect");
+    var selectedIndex = select.value;
+    playerInstance.setCurrentQuality(parseInt(selectedIndex));
+    hidePopup();
+}
+
+// Función para ocultar el popup
+function hidePopup() {
+    var popup = document.getElementById("qualityPopup");
+    popup.style.display = "none";
+}
 </script>
 </body>
 </html>
