@@ -66,6 +66,19 @@
     .popup button:hover {
         background-color: #cc0000; /* Color de fondo rojo más oscuro al pasar el cursor */
     }
+    /* Estilos para el mensaje de espera */
+    #waitingMessage {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #090B13; /* Color de fondo */
+        color: #fff; /* Color de texto blanco */
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 9999;
+    }
 </style>
 <script>
     function getParameterByName(name) {
@@ -85,6 +98,16 @@
         document.getElementById('player').style.display = 'block';
         document.getElementById('imageOverlay').style.display = 'none';
     }
+
+    // Función para mostrar el mensaje de espera
+    function showWaitingMessage() {
+        document.getElementById('waitingMessage').style.display = 'block';
+    }
+
+    // Mostrar el mensaje de espera si no hay parámetro 'get'
+    if (!getURL) {
+        showWaitingMessage();
+    }
 </script>
 </head>
 <body>
@@ -100,6 +123,11 @@
         <!-- Las opciones de calidad se agregarán aquí dinámicamente -->
     </select>
     <button onclick="applyQuality()">Aplicar</button>
+</div>
+
+<!-- Mensaje de espera -->
+<div id="waitingMessage">
+    <p>EL EVENTO NO HA COMENZADO. ESPERA UNOS MINUTOS Y VOLVE A INTENTAR.</p>
 </div>
 
 <script>
