@@ -89,21 +89,24 @@
     // Establecer la URL de la imagen en el atributo src de la etiqueta img
     document.getElementById('overlayImage').src = getIMG;
 
-    // Verificar si es un dispositivo Android TV y activar la pantalla completa
-    function enterFullscreenOnAndroidTV() {
-        if (isAndroidTV()) {
-            document.documentElement.requestFullscreen();
+    // Activar la pantalla completa al iniciar la reproducción
+    function enterFullscreen() {
+        var element = document.getElementById('player');
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
         }
     }
 
-    // Función para detectar si el dispositivo es un Android TV
-    function isAndroidTV() {
-        var ua = navigator.userAgent;
-        return ua.includes("Android") && ua.includes("TV");
-    }
-
-    // Entrar en pantalla completa al cargar la página
-    window.onload = enterFullscreenOnAndroidTV;
+    // Evento para activar la pantalla completa al iniciar la reproducción
+    jwplayer().on('play', function() {
+        enterFullscreen();
+    });
 </script>
 </head>
 <body>
