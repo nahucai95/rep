@@ -135,12 +135,13 @@ playerInstance.setup({
         "description": "Mirar Star+ de manera gratuita",
         "image": getIMG,
         "sources": [{
-            "default": true, // Establecer como verdadero para seleccionar esta calidad por defecto
+            "default": false, // Establecer como verdadero para seleccionar esta calidad por defecto
             "type": "dash",
             "file": getURL,
             "drm": {
                 "clearkey": {"keyId": getKEY, "key": getKEY2}
             },
+          "buffering": 10,
             "label": "720p" // Etiqueta para identificar la calidad 720p (6926 kbps)
         }]
     }],
