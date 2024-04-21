@@ -3,27 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obtener parámetro URL</title>
+    <title>Ejemplo de iframe con PHP</title>
 </head>
 <body>
-    <!-- Script para obtener el parámetro URL -->
-    <script>
-        // Obtener la URL del iframe
-        var iframeSrc = document.getElementById('miIframe').getAttribute('src');
-        
-        // Función para obtener el valor de un parámetro de la URL
-        function getParametroValor(url, parametro) {
-            var urlParams = new URLSearchParams(url);
-            return urlParams.get(parametro);
-        }
-        
-        // Obtener el valor del parámetro 'url'
-        var valorURL = getParametroValor(iframeSrc, 'url');
-        console.log('El valor del parámetro "url" es:', valorURL);
-    </script>
-
-   <!-- Tu iframe -->
-    <iframe id="miIframe" class="embed-responsive-item" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen src="valorURL" scrolling="no" frameBorder="0" allowfullscreen></iframe>
-
+    <?php
+    // Obtener la URL del parámetro 'url'
+    $url = isset($_GET['url']) ? $_GET['url'] : ''; // Si no se proporciona la URL, se establece como una cadena vacía
+    // Dimensiones del iframe
+    $width = "600px";
+    $height = "400px";
+    ?>
+    <iframe src="<?php echo $url; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" frameborder="0" allowfullscreen></iframe>
 </body>
 </html>
