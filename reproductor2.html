@@ -1,1 +1,29 @@
-<iframe class="embed-responsive-item" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen src="https://w3.mp.lura.live/player/prod/v3/anvload.html?key=eyJtIjogIkFOViIsICJ2IjogImFkc3RaMkU1Tkpud053MWUiLCAidG9rZW4iOiAiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKdFVXSmhNazlrWjFCSVVsZFdlamRvVG01MFRuaE5NbkpwT0RGeFRsZDVXQ0lzSW5acFpDSTZJbUZrYzNSYU1rVTFUa3B1ZDA1M01XVWlMQ0psZUhBaU9qRTNNVE0yTnprNE1qZ3NJbWxoZENJNk1UY3hNelU1TXpReU9IMC42Tzg0dnlubHN4alMxOG9nOU9oVEt3RDF0NkFuSkJwcWQxek1xMWRjWl8wIiwgImFudmFjayI6ICJtUWJhMk9kZ1BIUldWejdoTm50TnhNMnJpODFxTld5WCJ9" scrolling="no" frameBorder="0" allowfullscreen></iframe>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener parámetro URL</title>
+</head>
+<body>
+    <!-- Script para obtener el parámetro URL -->
+    <script>
+        // Obtener la URL del iframe
+        var iframeSrc = document.getElementById('miIframe').getAttribute('src');
+        
+        // Función para obtener el valor de un parámetro de la URL
+        function getParametroValor(url, parametro) {
+            var urlParams = new URLSearchParams(url);
+            return urlParams.get(parametro);
+        }
+        
+        // Obtener el valor del parámetro 'url'
+        var valorURL = getParametroValor(iframeSrc, 'url');
+        console.log('El valor del parámetro "url" es:', valorURL);
+    </script>
+
+   <!-- Tu iframe -->
+    <iframe id="miIframe" class="embed-responsive-item" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen src="valorURL" scrolling="no" frameBorder="0" allowfullscreen></iframe>
+
+</body>
+</html>
