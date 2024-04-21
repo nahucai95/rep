@@ -1,72 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="robots" content="noindex" />
-<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/console-ban@4.1.0/dist/console-ban.min.js"></script>
-<style type="text/css">
-    /* Apariencia General */
-    body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-    #player {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-    }
-    /* Ajustes para Android TV */
-    #player:focus {
-        outline: none; /* Eliminar el borde de enfoque para mejorar la apariencia en TV */
-    }
-</style>
-<script>
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
-        var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-    var getURL = getParameterByName('get');
-    var getIMG = getParameterByName('img');
-    var getKEY = getParameterByName('key');
-    var getKEY2 = getParameterByName('key2');
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFrame con URL dinámica</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-<div id="player" tabindex="0"></div> <!-- Añadir tabindex para que el reproductor pueda recibir el enfoque con el mando -->
-<script>
-var playerInstance = jwplayer("player");
-playerInstance.setup({
-    playlist: [{
-        "title": "Rustico TV | Star+",
-        "description": "Mirar Star+ de manera gratuita",
-        "image": getIMG,
-        "sources": [{
-            "default": true, // Establecer como verdadero para seleccionar esta calidad por defecto
-            "type": "dash",
-            "file": getURL,
-            "drm": {
-                "clearkey": {"keyId": getKEY, "key": getKEY2}
-            },
-            "label": "720p" // Etiqueta para identificar la calidad 720p (6926 kbps)
-        }]
-    }],
-    width: "100%",
-    height: "100%",
-    aspectratio: "16:9",
-    autostart: true, // Desactivar la reproducción automática
-    cast: {},
-    controls: true // Activar los controles del reproductor
-});
-</script>
+    <iframe id="miIframe" frameborder="0"></iframe>
+
+    <script>
+        // Función para obtener el valor del parámetro de la URL
+        function getParametroURL(nombre) {
+            nombre = nombre.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + nombre + "(=([^&#]*)|&|#|$)"),
+                resultados = regex.exec(window.location.href);
+            if (!resultados) return null;
+            if (!resultados[2]) return '';
+            return decodeURIComponent(resultados[2].replace(/\+/g, " "));
+        }
+
+        // Obtener el valor del parámetro "url" de la URL
+        var urlParametro = getParametroURL('url');
+
+        // Establecer la fuente del iframe con la URL obtenida
+        if (urlParametro) {
+            var iframe = document.getElementById('miIframe');
+            iframe.src = urlParametro;
+        }
+    </script>
 </body>
 </html>
